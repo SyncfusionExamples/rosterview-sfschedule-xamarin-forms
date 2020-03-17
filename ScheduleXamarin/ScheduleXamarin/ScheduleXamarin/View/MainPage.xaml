@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ScheduleXamarin"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
+             x:Class="ScheduleXamarin.MainPage">
+
+    <ContentPage.Behaviors>
+        <local:ScheduleBehavior/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.BindingContext>
+        <local:SchedulerViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <syncfusion:SfSchedule x:Name="schedule"
+                               ScheduleView="TimelineView"
+                               DataSource="{Binding Events}"
+                               ScheduleResources="{Binding Employees}"
+                               ShowResourceView="True"
+                               ResourceViewMode="Absolute"
+                               TimeInterval="1440"
+                               ResourceViewHeight="120"
+                               ViewHeaderHeight="50">
+
+            <syncfusion:SfSchedule.AppointmentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Label TextColor="Black" FontAttributes="Bold" Text="{Binding Subject}" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        <BoxView Color="{Binding Color}" CornerRadius="5" HeightRequest="10" WidthRequest="10" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfSchedule.AppointmentTemplate>
+
+        </syncfusion:SfSchedule>
+    </ContentPage.Content>
+
+</ContentPage>
